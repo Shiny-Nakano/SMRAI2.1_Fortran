@@ -7,8 +7,6 @@ program reppuana
 
   implicit none
 
-!  real(8), parameter :: pi=3.141592653589793238463
-
   integer, parameter :: nlearn=nt-576
   integer, parameter :: nspinup=10
 
@@ -19,8 +17,6 @@ program reppuana
   integer, dimension(nhist) :: iearr
   integer :: iesum
   integer :: nls
-
-!  integer, parameter :: nx=nlat*nlon
 
   real(8) :: al,au
   real(8), dimension(nnodes) :: xnodes,xdnodes
@@ -35,8 +31,6 @@ program reppuana
   real(8), dimension(npole) :: yobs
   real(8), dimension(npole,nt) :: Ymat
   real(8), dimension(npole) :: ymean
-
-!  real, dimension(nx,nt) :: Pot
 
   integer :: i,j,k,kk
   integer :: jopt,kcount,imon
@@ -117,14 +111,12 @@ program reppuana
   close(25)
 
   open(15,file='swall3_5min.txt',status='old')
-!  open(25,file='PCAvar.dat')
 
   xdoy=0.0
 
   do k=1,nlearn
     kk=kk+1
 
-!    read(15,*) yy,xmon,day,xhr,(zarr(i),i=1,nparams)
     read(15,*) yy,xmon,day,xhr,(zarr(i),i=1,4)
 
     do j=1,nlon
@@ -134,9 +126,6 @@ program reppuana
     zarr(1)=0.2*zarr(1)
     zarr(2)=0.2*zarr(2)
     zarr(3)=2.0*zarr(3)
-
-    ! zarr(1)=0.1*zarr(1)
-    ! zarr(2)=0.1*zarr(2)
 
     xdoypr=xdoy
 
@@ -154,7 +143,6 @@ program reppuana
     zarr(8)=sin(2*pi*xhr/24.0)
 
 
-!    read(25,'(50f16.6)') (yobs(i),i=1,nx)
     call forward(zarr,xnodes)
 
     if(xdoy-xdoypr > 0.1) then
@@ -178,8 +166,6 @@ program reppuana
 
       ymean(:)=ymean(:)+yobs(:)
     end if
-
-!    write(6,*) k,ae,xyvec(1),xnodes(1)
   end do
   close(15)
 
@@ -214,7 +200,6 @@ program reppuana
   write(6,*) sarr(1),sarr(nnodes)
 
   do i=1,nnodes
-!    write(6,*) sarr(i)
     sarr(i)=1.0/sqrt(sarr(i)+rsig*rsig)
   end do
 

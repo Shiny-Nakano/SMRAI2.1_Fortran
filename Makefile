@@ -1,33 +1,30 @@
 #
-#  Makefile for Intel oneAPI
+#  Makefile
 #
 
+## for Intel oneAPI
 FCC = ifx
-FP = mpiifx
-
+#FCC = ifort
 OPT = -r8 -zero -O2 -mcmodel=large
-FLG = -c
 OMP = -qopenmp
 LIB = -qmkl=parallel
 
+# ## for GNU Fortran
+# FCC = gfortran
+# OPT=-fdefault-real-8 -O3
+# OMP = -fopenmp
+# LIB = -lblas -llapack
+
+FLG = -c
+
+
 .SUFFIXES : .f .f90 .o
 
-all: fitreppu reppu_learn_srbf reppu_reconst_srbf
-
-fitreppu: reppu_par.o srbf.o polemapMC.o fitreppu.o
-	$(FCC) $(LIB) $(OPT) $^ -o $@
-
-reppu_learn_srbf: mtfort90_2.o reppu_par.o polemapMC.o reservoir.o reppu_learn_srbf.o
-	$(FCC) $^ -o $@ $(LIB) $(OMP)
-
-reppu_reconst_srbf: mtfort90_2.o reppu_par.o srbf.o polemapMC.o reservoir.o reppu_reconst_srbf.o
-	$(FCC) $^ -o $@ $(LIB) $(OMP)
+reppu_emulator: mtfort90.o reppu_par.o srbf.o polemap_l.o reservoir.o reppu_emulator.o
+	$(FCC) $^ -o $@ $(OPT) $(LIB)
 
 .f90.o:
 	$(FCC) $(FLG) $(OPT) $(OMP) $*.f90
-
-.f.o:
-	$(FCC) $(FLG) $(OPT) $*.f
 
 clean:
 	rm -f *.o *.mod
