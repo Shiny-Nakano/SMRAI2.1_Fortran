@@ -1,7 +1,3 @@
-!!
-!! Module for a spherical radial basis function
-!!
-
 module SRBF
   implicit none
 
@@ -9,16 +5,14 @@ module SRBF
   real(8), parameter :: pi=3.14159265358979323846, d2r=0.017453292519943295769
   real(8), dimension(3) :: obs_azim, obs_lam
 
-!  real(8), parameter :: xkappa = 32.92 !! 1.0/(2.0*(1-cos(10.0*pi/180.0)))
-!  real(8), parameter :: xkappa = 51.4 !! 1.0/(2.0*(1-cos(8.0*pi/180.0)))
 !  real(8), parameter :: xkappa = 131.4 !! 1.0/(2.0*(1-cos(5.0*pi/180.0)))
-!   real(8), parameter :: xkappa = 205.26 !! 1.0/(2.0*(1-cos(4.0*pi/180.0)))
   real(8), parameter :: xkappa = 525.33 !! 1.0/(2.0*(1-cos(2.5*pi/180.0)))
 !  real(8), parameter :: xkappa = 820.785 !! 1.0/(2.0*(1-cos(2.0*pi/180.0)))
 
   public SRBFfact
   public SRBFfact2
   public SRBFstream
+!  public set_secs_param
 contains
   subroutine product(a,b,c)
     real(8), dimension(3) :: a,b
@@ -50,7 +44,6 @@ contains
     sc(3)=sin(slat)
 
     soabs = sqrt(sc(1)*sc(1)+sc(2)*sc(2)+sc(3)*sc(3))
-
     SRBFstream = exp(xkappa*((sc(1)*ob(1)+sc(2)*ob(2)+sc(3)*ob(3))/soabs-1.0))
 
     return
