@@ -21,7 +21,7 @@ FLG = -c
 .SUFFIXES : .f .f90 .o
 
 reppu_emulator: mtfort90.o reppu_par.o srbf.o polemap_l.o reservoir.o reppu_emulator.o
-	$(FCC) $^ -o $@ $(OPT) $(LIB)
+	$(FCC) $^ -o $@ $(OPT) $(OMP) $(LIB)
 
 .f90.o:
 	$(FCC) $(FLG) $(OPT) $(OMP) $*.f90
