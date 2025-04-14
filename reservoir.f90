@@ -1,3 +1,8 @@
+!!
+!! Echo state network model
+!!
+!!  coded by S. Nakano (May 2021)
+!!
 module reservoir
   use mtmod
 !$  use omp_lib
