@@ -8,6 +8,11 @@
 ## Referece:
 ##  Saff & Kuijlaars, Math. Intelligencer, 11, 5-11, 1997. 
 ##
+## Usage: 
+##  > python3 genpoles_spiral.py
+##
+## Output: polepoints_sp.dat
+##
 
 import numpy as np
 import matplotlib.pylab as plt
