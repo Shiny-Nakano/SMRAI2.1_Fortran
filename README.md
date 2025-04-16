@@ -18,7 +18,7 @@ code to extract the Mersenne Twister module.
 It should contain year, day of year, hour, minute, solar-wind dynamic
 pressure, density, speed, temperature, and interplanetary magnetic field
 Bx, By, and Bz in this order. The file "swdata20170327.dat" is a sample 
-solar wind data. 
+solar wind data derived from the OMNI 5-min data. 
 
 
 3. It is necessary to generate the poles for a radial basis function network
